@@ -1,6 +1,6 @@
 # CDM prototype StarRocks dockerfiles
 
-These are an extremely naive Dockerfiles allowing deployment of StarRocks front end and
+These are extremely naive Dockerfiles allowing deployment of StarRocks front end and
 compute nodes in Rancher.
 
 ## IMPORTANT NOTE
@@ -15,6 +15,11 @@ especially:
 https://docs.starrocks.io/docs/deployment/environment_configurations/
 
 These are NOT taken into account in these Dockerfiles.
+
+## Variables
+
+Variables that need to be set are documented in the scripts in the ./scripts directory.
+In particular, see the *entrypoint.sh fiels for variables that are set to default values.
 
 ## Notes
 

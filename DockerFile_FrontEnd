@@ -1,0 +1,11 @@
+FROM starrocks/fe-ubuntu:3.2.8
+
+RUN mkdir -p /opt/sr_scripts
+
+COPY scripts/* /opt/sr_scripts
+
+RUN chmod a+x /opt/sr_scripts/*
+
+RUN /opt/sr_scripts/fe-setup.sh
+
+ENTRYPOINT ["/opt/sr_scripts/fe-entrypoint.sh"]
