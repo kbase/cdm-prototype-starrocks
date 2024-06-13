@@ -72,27 +72,28 @@ services:
     depends_on:
       - minio
 
+  # NOTE: To add the CN to the system, you need to manually run 
+  # ALTER SYSTEM ADD COMPUTE NODE "starrocks-cn:9051"
+  # (or whatever port / host name you choose) on the FE node
   starrocks-cn:
-    image: starrocks/cn-ubuntu:3.2-latest
-    command:
-      - /bin/bash
-      - -c
-      - |
-        sleep 15s;
-        ulimit -u 65535;
-        ulimit -n 65535;
-        mysql --connect-timeout 2 -h starrocks-fe -P9031 -uroot -e "ALTER SYSTEM ADD COMPUTE NODE \"starrocks-cn:9050\";"
-        /opt/starrocks/cn/bin/start_cn.sh
+    build:
+      context: .
+      dockerfile: ./DockerFile_ComputeNode
+    environment:
+      - STARROCKS_HOME=/starrocks/cn1
+      - SLEEP_FOR=15s
+      - THRIFT_RPC_PORT=9061
+      - HTTP_PORT=8041
+      - HEARTBEAT_PORT=9051
+      - BRPC_PORT=8061
+      - STARLET_PORT=9071
     ports:
-      - 8040:8040
+      - 8041:8041
     hostname: starrocks-cn
     container_name: starrocks-cn
     user: root
+    volumes:
+      - ./cdr/cdm/starrocks:/starrocks
     depends_on:
       - starrocks-fe
       - minio
-    healthcheck:
-      test: 'mysql -u root -h starrocks-fe -P 9031 -e "SHOW COMPUTE NODES\G" |grep "Alive: true"'
-      interval: 10s
-      timeout: 5s
-      retries: 3
