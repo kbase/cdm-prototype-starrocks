@@ -1,7 +1,5 @@
 #!/bin/sh
 
-# TODO: image buids
-
 TF=/opt/starrocks/fe/conf/fe.conf
 
 # NOTE: All FE nodes in a cluster must have the same http port:

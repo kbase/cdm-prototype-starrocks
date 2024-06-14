@@ -1,0 +1,23 @@
+name: Build & Push StarRocks FE Image to GHCR
+
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - ready_for_review
+
+  push:
+    branches:
+      - main
+      - master
+      - develop
+
+jobs:
+  trigger-build-push:
+    uses: ./.github/workflows/build_push_node_images.yaml
+    with:
+      node_name: fe
+      docker_file: './DockerFile_FrontEnd'
+    secrets: inherit
