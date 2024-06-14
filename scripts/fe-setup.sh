@@ -12,7 +12,7 @@ sed -i "s#^query_port =.*#query_port = \${SQL_QUERY_PORT}#" $TF
 sed -i "s#^edit_log_port =.*#edit_log_port = \${EDIT_LOG_PORT}#" $TF
 
 # Store log data in data dir
-sed -i "s#^LOG_DIR = \${STARROCKS_HOME}/log$#LOG_DIR = \${STARROCKS_DATA}/log#" $TF
+sed -i "s#^LOG_DIR =.*#LOG_DIR = \${STARROCKS_DATA}/log#" $TF
 
 # Set up Minio 
 echo "# enable shared data, set storage type, set endpoint" >> $TF
