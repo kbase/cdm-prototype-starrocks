@@ -49,7 +49,7 @@ services:
     container_name: starrocks-fe
     user: root
     environment:
-      - STARROCKS_HOME=/starrocks/fe1
+      - STARROCKS_DATA=/starrocks_mount/fe1
       - HTTP_PORT=8031
       - THRIFT_RPC_PORT=9021
       - SQL_QUERY_PORT=9031
@@ -63,7 +63,7 @@ services:
       - 9021:9021
       - 9031:9031
     volumes:
-      - ./cdr/cdm/starrocks:/starrocks
+      - ./cdr/cdm/starrocks:/starrocks_mount
     healthcheck:
       test: 'mysql -u root -h starrocks-fe -P 9031 -e "show frontends\G" |grep "Alive: true"'
       interval: 10s
@@ -73,14 +73,14 @@ services:
       - minio
 
   # NOTE: To add the CN to the system, you need to manually run 
-  # ALTER SYSTEM ADD COMPUTE NODE "starrocks-cn:9051"
+  # ALTER SYSTEM ADD COMPUTE NODE "starrocks-cn:9051";
   # (or whatever port / host name you choose) on the FE node
   starrocks-cn:
     build:
       context: .
       dockerfile: ./DockerFile_ComputeNode
     environment:
-      - STARROCKS_HOME=/starrocks/cn1
+      - STARROCKS_DATA=/starrocks_mount/cn1
       - SLEEP_FOR=15s
       - THRIFT_RPC_PORT=9061
       - HTTP_PORT=8041
@@ -93,7 +93,7 @@ services:
     container_name: starrocks-cn
     user: root
     volumes:
-      - ./cdr/cdm/starrocks:/starrocks
+      - ./cdr/cdm/starrocks:/starrocks_mount
     depends_on:
       - starrocks-fe
       - minio
