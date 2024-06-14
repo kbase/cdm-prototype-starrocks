@@ -24,3 +24,9 @@ In particular, see the *entrypoint.sh fiels for variables that are set to defaul
 ## Notes
 
 * The dockerfiles use mostly default values, which is almost certainly bad.
+
+## TODO
+
+* Make GHA to push images from a release if we ever get to that point
+* Dependabot / Trivy
+* Tests...? Could start up the images and make sure they're contactable I guess
