@@ -17,6 +17,11 @@ echo "SQL_QUERY_PORT=${SQL_QUERY_PORT}"
 echo "EDIT_LOG_PORT=${EDIT_LOG_PORT}"
 echo "START_FOLLOWER_W_LEADER_EDIT_LOG_URL=${START_FOLLOWER_W_LEADER_EDIT_LOG_URL}"
 
+if [ -n "$SLEEP_FOR" ]; then
+	echo "Sleeping for $SLEEP_FOR"
+	sleep $SLEEP_FOR;
+fi
+
 # NOTE: this env var is only required the first time the follower is added to the cluster
 # See https://docs.starrocks.io/docs/deployment/deploy_manually/
 if [ -n "$START_FOLLOWER_W_LEADER_EDIT_LOG_URL" ]; then
