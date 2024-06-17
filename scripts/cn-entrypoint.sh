@@ -16,6 +16,7 @@ echo "BRPC_PORT=${BRPC_PORT}"
 echo "STARLET_PORT=${STARLET_PORT}"
 
 if [ -n "$SLEEP_FOR" ]; then
+	echo "Sleeping for $SLEEP_FOR"
 	sleep $SLEEP_FOR;
 fi
 

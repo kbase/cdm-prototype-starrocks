@@ -16,6 +16,8 @@ https://docs.starrocks.io/docs/deployment/environment_configurations/
 
 These are NOT taken into account in these Dockerfiles.
 
+However, the AVX2 instruction set is required for these images to run.
+
 ## Variables
 
 Variables that need to be set are documented in the scripts in the ./scripts directory.
